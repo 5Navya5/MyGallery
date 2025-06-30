@@ -1,0 +1,7 @@
+<h2>Edit Comments</h2> 
+<form method="post">
+    {% csrf_token %}
+
+    <p>Are you sure you want to edit the comment"{{comment.text}}"</p>p> 
+    <button type="submit">Save Changes</button>
+</form> 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }} - Blog Detail</title>
+</head>
+<body>
+    <h1>{{ product.name }} - Blog </h1>
+    
+    <div>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" width="200">
+    </div>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+	<h3>Comments:</h3>
+    {% for comment in comments %}
+	  <p><strong>{{comment.name}}</strong>:{{comment.body}}</p>
+    {% empty %}
+	
+	  <p>No comments yet</p>
+	{% endfor %}
+	<h3>Add a comment:</h3>
+	<form method="POST">
+	  {% csrf_token %}
+	  {{form.as_p}}
+	  <button type="submit">submit</button>
+    </form> 
+    
+    <a href="{% url 'edit_product' product.pk %}">Edit</a>
+    <a href="{% url 'delete_product' product.pk %}">Delete</a> <br>
+    
+    <a href="{% url 'product_list' %}">Back to Blogs Home Page</a>
+</body>
+</html>

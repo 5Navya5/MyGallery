@@ -1,0 +1,7 @@
+<h2>Delete comment</h2>
+<p>Are you sure do you want to delete comment "{{ comment.text }}"</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'comment_list' %}">Cancel</a>
+</form>

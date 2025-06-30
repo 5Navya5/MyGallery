@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Website</title>
+</head>
+<body>
+    <h1>Today's New Blogs</h1>
+    <div>
+        {% for product in products %}
+            <div style="border: 1px solid #ccc; margin-bottom: 20px; padding: 10px;">
+                <h2><a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a></h2>
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: auto;">
+                <p>{{ product.description }}</p>
+                <p><small>Created at: {{ product.created_at }}</small></p>
+                <p><small>Updated at: {{ product.updated_at }}</small></p>
+                {% if user == product.user %}
+                  <a href="{% url 'edit_product' product.pk %}">Edit</a> |
+                  <a href="{% url 'delete_product' product.pk %}">Delete</a>
+                {% endif %}  
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

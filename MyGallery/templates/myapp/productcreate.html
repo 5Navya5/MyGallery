@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Product</title>
+</head>
+<body>
+    <h2>Create New Product</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+
+    <p><a href="{% url 'product_list' %}">Back to Product List</a></p>
+</body>
+</html>

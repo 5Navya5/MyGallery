@@ -1,0 +1,44 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- Flash messages -->
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- Dashboard welcome -->
+  <div class="dashboard">
+    <h2>Welcome, {{ user.username }}!</h2>
+
+    <!-- Create Product button -->
+    <!--<a href="{% url 'product_create' %}" class="btn">+ Create New Product</a>-->
+
+    {% if products %}
+      <h3>Your Products</h3>
+      <ul class="product-list">
+        {% for product in products %}
+          <li>
+            <strong>{{ product.name }}</strong><br>
+            {{ product.description }}<br>
+            {% if product.image %}
+              <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
+            {% else %}
+              <p><em>"No image uploaded</em></p>
+            {% endif %}
+            <!-- Edit and Delete links -->
+            <a href="{% url 'edit_product' product.pk %}">Edit</a> |
+            <a href="{% url 'delete_product' product.pk %}">Delete</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>You haven't created any products yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
